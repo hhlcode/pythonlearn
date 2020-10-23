@@ -8,10 +8,10 @@ from sklearn.decomposition import PCA
 import jieba
 import numpy as np
 def ditvect():
-    # """
-    # 字典数据抽取
-    # return none
-    # """
+    """
+    字典数据抽取
+    return none
+    """
     # 实例化对象，如果将sparse 矩阵转化为false ,就是普通矩阵
     dict=DictVectorizer(sparse=False)
     # 调用fit_transform的方法，将集合中的数据提取,为sparse矩阵

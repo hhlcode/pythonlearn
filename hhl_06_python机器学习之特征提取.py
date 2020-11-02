@@ -1,4 +1,5 @@
 from sklearn.feature_extraction import DictVectorizer
+from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import MinMaxScaler,StandardScaler
@@ -23,23 +24,31 @@ def datasets_demo():
 #  # 
 #     x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2, random_state=22)
 #     print("训练集的特征值：\n", x_train, x_train.shape)
-
     # 第二步数据集划分，划分为特征值和目标值的测试集和训练集
     x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2, random_state=22)
+# #    这里的random_state就是为了保证程序每次运行都分割一样的训练集和测试集。否则，同样的算法模型在不同的训练集和测试集上的效果不一样。
+# train_data：所要划分的样本特征集
+# train_target：所要划分的样本结果
+# test_size：样本占比，如果是整数的话就是样本的数量,这里测试集占验证集20%
+# random_state：是随机数的种子。
+    print("打印训练集的特征：", x_train, x_train.shape)
     return None
 def ditvect():
     """
-    字典数据抽取
+    字典特征数据抽取
     return none
     """
-    # 实例化对象，如果将sparse 矩阵转化为false ,就是普通矩阵
+    # 第一步 实例化一个转换器类，sparse 稀疏矩阵，如果将sparse矩阵转化为false ,就是普通矩阵吧 
     dict=DictVectorizer(sparse=True)
     # 调用fit_transform的方法，将集合中的数据提取,为sparse矩阵
     data =dict.fit_transform([{'city':'北京', 'temperature':100},
     {'city':'上海','temperature':77},{'city':'广州','temperature':33}])
 
-    print("获取特征名",dict.get_feature_names())
-    print(data)
+    print("获取特征名",dict.get_feature_names())#获取特征名 ['city=上海', 'city=北京', 'city=广州', 'temperature']
+    print(data.toarray(),type(data))
+#  [[  0.   1.   0. 100.]
+#  [  1.   0.   0.  77.]
+#  [  0.   0.   1.  33.]]
     return None
 
 def countdev():
@@ -132,4 +141,6 @@ if __name__ == "__main__":
     # ditvect()
     # pca()
     # 测试数据集
-    datasets_demo()
+    # datasets_demo()
+    # 字典特征提取
+    ditvect()

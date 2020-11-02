@@ -4,21 +4,41 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import MinMaxScaler,StandardScaler
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.decomposition import PCA
+from sklearn.datasets import load_iris
 
 import jieba
 import numpy as np
+def datasets_demo():
+    """
+    retutn None
+    sklearn 数据集的使用
+    """
+    # 第一步获取数据集
+    iris=load_iris()
+    # print("打印鸢尾花的数据集",iris)
+    # print("打印数据集描述",iris['DESCR'])
+    # print("查看特征名称",iris.feature_names)
+    # print("查看特征值",iris.data,iris.data.shape)
+
+#  # 
+#     x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2, random_state=22)
+#     print("训练集的特征值：\n", x_train, x_train.shape)
+
+    # 第二步数据集划分，划分为特征值和目标值的测试集和训练集
+    x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2, random_state=22)
+    return None
 def ditvect():
     """
     字典数据抽取
     return none
     """
     # 实例化对象，如果将sparse 矩阵转化为false ,就是普通矩阵
-    dict=DictVectorizer(sparse=False)
+    dict=DictVectorizer(sparse=True)
     # 调用fit_transform的方法，将集合中的数据提取,为sparse矩阵
     data =dict.fit_transform([{'city':'北京', 'temperature':100},
     {'city':'上海','temperature':77},{'city':'广州','temperature':33}])
 
-    print(dict.get_feature_names())
+    print("获取特征名",dict.get_feature_names())
     print(data)
     return None
 
@@ -109,4 +129,7 @@ def pca():
     print(data)
     return None
 if __name__ == "__main__":
-    pca()
+    # ditvect()
+    # pca()
+    # 测试数据集
+    datasets_demo()
